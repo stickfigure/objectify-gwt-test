@@ -122,7 +122,7 @@ public class Objectify_gwt_test implements EntryPoint {
 				textToServerLabel.setText(textToServer);
 				serverResponseLabel.setText("");
 				greetingService.greetServer(new Text(textToServer),
-						new AsyncCallback<String>() {
+						new AsyncCallback<Text>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
 								dialogBox
@@ -134,11 +134,11 @@ public class Objectify_gwt_test implements EntryPoint {
 								closeButton.setFocus(true);
 							}
 
-							public void onSuccess(String result) {
+							public void onSuccess(Text result) {
 								dialogBox.setText("Remote Procedure Call");
 								serverResponseLabel
 										.removeStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(result);
+								serverResponseLabel.setHTML(result.getValue());
 								dialogBox.center();
 								closeButton.setFocus(true);
 							}
