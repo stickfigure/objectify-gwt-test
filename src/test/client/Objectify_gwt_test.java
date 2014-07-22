@@ -1,6 +1,8 @@
 package test.client;
 
 import test.shared.FieldVerifier;
+
+import com.google.appengine.api.datastore.Text;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -119,7 +121,7 @@ public class Objectify_gwt_test implements EntryPoint {
 				sendButton.setEnabled(false);
 				textToServerLabel.setText(textToServer);
 				serverResponseLabel.setText("");
-				greetingService.greetServer(textToServer,
+				greetingService.greetServer(new Text(textToServer),
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
