@@ -2,6 +2,7 @@ package test.server;
 
 import test.client.GreetingService;
 import test.shared.FieldVerifier;
+import test.shared.Thing;
 
 import com.google.appengine.api.datastore.Text;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -13,8 +14,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class GreetingServiceImpl extends RemoteServiceServlet implements
 		GreetingService {
 
-	public Text greetServer(Text input2) throws IllegalArgumentException {
-		String input = input2.getValue();
+	public Thing greetServer(Thing thing) throws IllegalArgumentException {
+		String input = thing.pt.toString();
 		
 		// Verify that the input is valid. 
 		if (!FieldVerifier.isValidName(input)) {
@@ -31,8 +32,9 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		input = escapeHtml(input);
 		userAgent = escapeHtml(userAgent);
 
-		return new Text("Hello, " + input + "!<br><br>I am running " + serverInfo
-				+ ".<br><br>It looks like you are using:<br>" + userAgent);
+		return thing;
+//		return new Text("Hello, " + input + "!<br><br>I am running " + serverInfo
+//				+ ".<br><br>It looks like you are using:<br>" + userAgent);
 	}
 
 	/**

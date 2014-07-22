@@ -1,6 +1,7 @@
 package test.client;
 
-import com.google.appengine.api.datastore.Text;
+import test.shared.Thing;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -9,5 +10,5 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("greet")
 public interface GreetingService extends RemoteService {
-	Text greetServer(Text name) throws IllegalArgumentException;
+	Thing greetServer(Thing name) throws IllegalArgumentException;
 }

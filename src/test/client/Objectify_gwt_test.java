@@ -1,8 +1,9 @@
 package test.client;
 
 import test.shared.FieldVerifier;
+import test.shared.Thing;
 
-import com.google.appengine.api.datastore.Text;
+import com.google.appengine.api.datastore.GeoPt;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -121,8 +122,13 @@ public class Objectify_gwt_test implements EntryPoint {
 				sendButton.setEnabled(false);
 				textToServerLabel.setText(textToServer);
 				serverResponseLabel.setText("");
-				greetingService.greetServer(new Text(textToServer),
-						new AsyncCallback<Text>() {
+				
+				String[] coords = textToServer.split(",");
+				Thing thing = new Thing();
+				thing.pt = new GeoPt(Float.parseFloat(coords[0]), Float.parseFloat(coords[1]));
+				
+				greetingService.greetServer(thing,
+						new AsyncCallback<Thing>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
 								dialogBox
@@ -134,11 +140,11 @@ public class Objectify_gwt_test implements EntryPoint {
 								closeButton.setFocus(true);
 							}
 
-							public void onSuccess(Text result) {
+							public void onSuccess(Thing result) {
 								dialogBox.setText("Remote Procedure Call");
 								serverResponseLabel
 										.removeStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(result.getValue());
+								serverResponseLabel.setHTML(result.pt.toString());
 								dialogBox.center();
 								closeButton.setFocus(true);
 							}
